@@ -6,8 +6,14 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 #import "RNSketch.h"
+  
+@interface RNSketchManager : RCTViewManager
+
+@property (nonatomic, strong) UIColor *strokeColor;
+@property (nonatomic, assign) NSInteger strokeThickness;
+
 
 @interface RNSketchManager : RCTViewManager
 

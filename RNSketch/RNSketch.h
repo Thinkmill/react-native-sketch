@@ -11,6 +11,8 @@
 
 @interface RNSketch : UIView
 
+- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispather NS_DESIGNATED_INITIALIZER;
+- (void)setStrokeColor:(UIColor *)strokeColor;
 - (void)clearDrawing;
 - (NSString *)base64Code;
 

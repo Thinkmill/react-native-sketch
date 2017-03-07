@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   NativeModules,
@@ -8,8 +9,8 @@ import {
 
 const { func, number, string, bool, oneOf } = React.PropTypes;
 
+const {func, number, string} = React.PropTypes;
 const SketchManager = NativeModules.RNSketchManager || {};
-
 const styles = StyleSheet.create({
   base: {
     flex: 1,
@@ -18,9 +19,7 @@ const styles = StyleSheet.create({
 });
 
 export default class Sketch extends React.Component {
-
   static propTypes = {
-    fillColor: string,
     onChange: func,
     onReset: func,
     clearButtonHidden: bool,
@@ -32,7 +31,6 @@ export default class Sketch extends React.Component {
   };
 
   static defaultProps = {
-    fillColor: '#ffffff',
     onChange: () => {},
     onReset: () => {},
     clearButtonHidden: false,
@@ -41,6 +39,26 @@ export default class Sketch extends React.Component {
     style: null,
     imageType: 'jpg'
   };
+
+
+  constructor(props) {
+    super(props);
+    this.onReset = this.onReset.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
+  }
+
+  onReset() {
+    this.props.onUpdate(null);
+    this.props.onReset();
+  }
+
+  onUpdate(e) {
+    if (e.nativeEvent.image) {
+      this.props.onUpdate(`${BASE_64_CODE}${e.nativeEvent.image}`);
+    } else {
+      this.onReset();
+    }
+  }
 
   saveImage(image) {
     if (typeof image !== 'string') {
@@ -58,6 +76,7 @@ export default class Sketch extends React.Component {
     return (
       <RNSketch
         {...this.props}
+        onChange={this.onUpdate}
         style={[styles.base, this.props.style]}
       />
     );

@@ -8,9 +8,9 @@
 
 #import "RNSketchManager.h"
 #import "RNSketch.h"
-#import "RCTBridge.h"
-#import "RCTConvert.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTBridge.h>
+#import <React/RCTConvert.h>
+#import <React/RCTEventDispatcher.h>
 
 #define ERROR_IMAGE_INVALID @"ERROR_IMAGE_INVALID"
 #define ERROR_FILE_CREATION @"ERROR_FILE_CREATION"
@@ -24,6 +24,12 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_VIEW_PROPERTY(onReset, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock);
 
+RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
+{
+  [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
+}
+RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
+  
 #pragma mark - Properties
 
 RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor);

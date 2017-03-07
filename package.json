@@ -1,18 +1,18 @@
 {
   "name": "react-native-sketch",
-  "version": "0.2.4",
+  "version": "0.2.7",
   "description": "A react-native component for touch-based drawing",
   "main": "index.ios.js",
   "dependencies": {},
   "devDependencies": {
-    "babel-eslint": "^6.0.4",
-    "eslint": "^2.9.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.7.0",
-    "eslint-plugin-jsx-a11y": "^1.2.0",
-    "eslint-plugin-react": "^5.1.1",
-    "react": "^0.14.5",
-    "react-native": "^0.24.1"
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-react": "^6.8.0",
+    "react": "^15.4.1",
+    "react-native": "^0.40.0"
   },
   "scripts": {
     "postversion": "git push && git push --tags",

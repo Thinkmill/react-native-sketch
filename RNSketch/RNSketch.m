@@ -8,8 +8,8 @@
 
 #import "RNSketch.h"
 #import "RNSketchManager.h"
-#import "RCTEventDispatcher.h"
-#import "RCTView.h"
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTView.h>
 #import "UIView+React.h"
 
 @implementation RNSketch
@@ -20,6 +20,8 @@
   UIImage *_image;
   CGPoint _points[5];
   uint _counter;
+  // Configuration settings
+  UIColor *_strokeColor;
 }
 
 
@@ -63,7 +65,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (void)initClearButton
 {
   // Clear button
-  CGRect frame = CGRectMake(0, 0, 40, 40);
+  CGRect frame = CGRectMake(0, 0, 50, 50);
   _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
   _clearButton.frame = frame;
   _clearButton.enabled = false;
@@ -153,13 +155,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
-
-  // If first time, paint background
-  if (!_image) {
-    [_fillColor setFill];
-    [[UIBezierPath bezierPathWithRect:self.bounds] fill];
-  }
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
   // Draw with context
   [_image drawAtPoint:CGPointZero];
@@ -213,11 +209,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 }
 
 #pragma mark - Setters
-
-- (void)setFillColor:(UIColor *)fillColor
-{
-  _fillColor = fillColor;
-}
 
 - (void)setStrokeColor:(UIColor *)strokeColor
 {

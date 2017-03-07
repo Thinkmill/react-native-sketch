@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.2.6] - 2016-12-09
+### Changed
+- Fixed `onReset` callback
+- PNG image output 
+
+## [v0.2.5] - 2016-12-06
+### Changed
+- Replaced a `fillColor` property with a `backgroundColor` style to allow drawing with a transparent background  
+
 ## [v0.2.4] - 2016-06-06
 ### Changed
 - Corrected `PropTypes` import in index.ios.js - Removed from 'react-native' package...

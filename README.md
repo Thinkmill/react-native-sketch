@@ -5,23 +5,20 @@
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-1dce73.svg?style=flat-square)](https://gitter.im/jgrancher/react-native-sketch)
 [![MIT License](https://img.shields.io/npm/l/react-native-sketch.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-*A react-native component for touch-based drawing.*
+*A react-native component for touch-based drawing with an ability to draw over the images.*
 
 ![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
 
 ## Getting started
 
-Install [rnpm](https://github.com/rnpm/rnpm) to make things easy:
+Use react-native to install and link this component to your project:
 ```bash
-$ npm i -g rnpm
-```
-
-Then, use rnpm to [install and link](https://github.com/rnpm/rnpm#running) this component to your project:
-```bash
-$ rnpm install react-native-sketch
+$ react-native install react-native-sketch
 ```
 
 ## Usage
+
+### Solid background
 
 ```javascript
 import React, { Component } from 'react';
@@ -30,7 +27,7 @@ import Sketch from 'react-native-sketch';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 20,    
   },
   instructions: {
     fontSize: 16,
@@ -40,6 +37,7 @@ const styles = StyleSheet.create({
   sketch: {
     height: 250, // Height needed; Default: 200px
     marginBottom: 20,
+    backgroundColor: '#ffffff', // Solid White background. Replacement for the fillColor property
   },
   button: {
     alignItems: 'center',
@@ -98,7 +96,6 @@ class Signature extends Component {
           Use your finger on the screen to sign.
         </Text>
         <Sketch
-          fillColor="#f5f5f5"
           strokeColor="#111111"
           strokeThickness={2}
           onReset={this.onReset}
@@ -121,6 +118,36 @@ class Signature extends Component {
 
 export default Signature;
 ```
+
+### Render over the image (transparent background) 
+
+1. Set the transparent backgroundColor style property. 
+
+```javascript
+const styles = StyleSheet.create({
+  sketch: {
+    height: 250, 
+    backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background
+  }
+});
+  ```
+2. Wrap the Sketch component into the Image component
+  
+```javascript
+  <Image
+    style={ styles.imageStyle }
+    source={ {uri: imageUri} }
+  >
+    <Sketch
+      strokeColor="#111111"
+      strokeThickness={2}
+      onReset={this.onReset}
+      onUpdate={this.onUpdate}
+      ref={(sketch) => { this.sketch = sketch; }}
+      style={styles.sketch}
+    />
+  </Image>
+ ```
 
 ## Roadmap
 
